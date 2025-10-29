@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json.schemastore.org/appsettings.json",
+  "Dataverse": {
+    "CurrentEnvironment": "development",
+    "Environments": {
+      "development": {
+        "DisplayName": "Development Environment",
+        "OrganizationUrl": "https://yourorg-dev.crm.dynamics.com",
+        "Authentication": {
+          "AuthType": "Interactive",
+          "TenantId": "00000000-0000-0000-0000-000000000000",
+          "ClientId": "00000000-0000-0000-0000-000000000000",
+          "RedirectUri": "http://localhost"
+        },
+        "TimeoutSeconds": 30,
+        "MaxRetryAttempts": 3
+      },
+      "testing": {
+        "DisplayName": "Testing Environment",
+        "OrganizationUrl": "https://yourorg-test.crm.dynamics.com",
+        "Authentication": {
+          "AuthType": "ServicePrincipal",
+          "TenantId": "00000000-0000-0000-0000-000000000000",
+          "ClientId": "00000000-0000-0000-0000-000000000000",
+          "ClientSecret": "your-client-secret-here"
+        },
+        "TimeoutSeconds": 45,
+        "MaxRetryAttempts": 3
+      },
+      "production": {
+        "DisplayName": "Production Environment",
+        "OrganizationUrl": "https://yourorg.crm.dynamics.com",
+        "Authentication": {
+          "AuthType": "ServicePrincipal",
+          "TenantId": "00000000-0000-0000-0000-000000000000",
+          "ClientId": "00000000-0000-0000-0000-000000000000",
+          "ClientSecret": "your-production-client-secret-here"
+        },
+        "TimeoutSeconds": 60,
+        "MaxRetryAttempts": 5
+      },
+      "sandbox": {
+        "DisplayName": "Sandbox Environment",
+        "OrganizationUrl": "https://yourorg-sandbox.crm.dynamics.com",
+        "Authentication": {
+          "AuthType": "Interactive",
+          "TenantId": "00000000-0000-0000-0000-000000000000",
+          "ClientId": "00000000-0000-0000-0000-000000000000",
+          "RedirectUri": "http://localhost"
+        },
+        "TimeoutSeconds": 30,
+        "MaxRetryAttempts": 2
+      }
+    }
+  }
+}

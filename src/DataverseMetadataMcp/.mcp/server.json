@@ -1,0 +1,131 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+  "description": "MCP server for querying Microsoft Dataverse metadata across multiple environments",
+  "name": "io.github.sergiocabellopacha/dataverse-metadata-mcp",
+  "version": "1.0.0",
+  "packages": [
+    {
+      "registryType": "nuget",
+      "registryBaseUrl": "https://api.nuget.org",
+      "identifier": "DataverseMetadataMcp",
+      "version": "1.0.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "packageArguments": [],
+      "environmentVariables": [
+        {
+          "name": "DATAVERSE_MCP_Dataverse__CurrentEnvironment",
+          "value": "{current_environment}",
+          "variables": {
+            "current_environment": {
+              "description": "The name of the Dataverse environment to use (e.g., development, production, sandbox)",
+              "isRequired": true,
+              "isSecret": false
+            }
+          }
+        },
+        {
+          "name": "DATAVERSE_MCP_Dataverse__Environments__{environment_name}__DisplayName",
+          "value": "{environment_display_name}",
+          "variables": {
+            "environment_name": {
+              "description": "Environment key name (e.g., production)",
+              "isRequired": true,
+              "isSecret": false
+            },
+            "environment_display_name": {
+              "description": "Display name for the environment",
+              "isRequired": true,
+              "isSecret": false
+            }
+          }
+        },
+        {
+          "name": "DATAVERSE_MCP_Dataverse__Environments__{environment_name}__OrganizationUrl",
+          "value": "{organization_url}",
+          "variables": {
+            "environment_name": {
+              "description": "Environment key name (e.g., production)",
+              "isRequired": true,
+              "isSecret": false
+            },
+            "organization_url": {
+              "description": "Dataverse organization URL (e.g., https://yourorg.crm.dynamics.com)",
+              "isRequired": true,
+              "isSecret": false
+            }
+          }
+        },
+        {
+          "name": "DATAVERSE_MCP_Dataverse__Environments__{environment_name}__Authentication__AuthType",
+          "value": "{auth_type}",
+          "variables": {
+            "environment_name": {
+              "description": "Environment key name (e.g., production)",
+              "isRequired": true,
+              "isSecret": false
+            },
+            "auth_type": {
+              "description": "Authentication type: 'ServicePrincipal' or 'Interactive'",
+              "isRequired": true,
+              "isSecret": false
+            }
+          }
+        },
+        {
+          "name": "DATAVERSE_MCP_Dataverse__Environments__{environment_name}__Authentication__TenantId",
+          "value": "{tenant_id}",
+          "variables": {
+            "environment_name": {
+              "description": "Environment key name (e.g., production)",
+              "isRequired": true,
+              "isSecret": false
+            },
+            "tenant_id": {
+              "description": "Azure AD Tenant ID",
+              "isRequired": true,
+              "isSecret": false
+            }
+          }
+        },
+        {
+          "name": "DATAVERSE_MCP_Dataverse__Environments__{environment_name}__Authentication__ClientId",
+          "value": "{client_id}",
+          "variables": {
+            "environment_name": {
+              "description": "Environment key name (e.g., production)",
+              "isRequired": true,
+              "isSecret": false
+            },
+            "client_id": {
+              "description": "Azure AD Application (Client) ID",
+              "isRequired": true,
+              "isSecret": false
+            }
+          }
+        },
+        {
+          "name": "DATAVERSE_MCP_Dataverse__Environments__{environment_name}__Authentication__ClientSecret",
+          "value": "{client_secret}",
+          "variables": {
+            "environment_name": {
+              "description": "Environment key name (e.g., production)",
+              "isRequired": false,
+              "isSecret": true
+            },
+            "client_secret": {
+              "description": "Azure AD Client Secret (required only for ServicePrincipal auth)",
+              "isRequired": false,
+              "isSecret": true
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "repository": {
+    "url": "https://github.com/sergiocabellopacha/Davaverse_Metadata_MCP",
+    "source": "github"
+  }
+}

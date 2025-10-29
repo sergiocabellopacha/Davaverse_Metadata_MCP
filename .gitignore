@@ -416,3 +416,20 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+# Dataverse MCP Server specific
+# Configuration files with secrets
+appsettings.Development.json
+appsettings.Production.json
+appsettings.Local.json
+config/server-config.local.json
+config/server-config.production.json
+
+# Sensitive data
+secrets/
+*.p12
+*.key
+*.pem
+
+# Local runtime files
+*.temp

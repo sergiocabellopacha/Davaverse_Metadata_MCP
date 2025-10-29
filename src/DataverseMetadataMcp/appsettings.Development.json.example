@@ -1,0 +1,51 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information",
+      "DataverseMetadataMcp": "Debug"
+    }
+  },
+  "Dataverse": {
+    "CurrentEnvironment": "development",
+    "Environments": {
+      "development": {
+        "DisplayName": "Development Environment",
+        "OrganizationUrl": "https://yourorg-dev.crm.dynamics.com",
+        "Authentication": {
+          "AuthType": "Interactive",
+          "TenantId": "00000000-0000-0000-0000-000000000000",
+          "ClientId": "00000000-0000-0000-0000-000000000000",
+          "RedirectUri": "http://localhost"
+        },
+        "TimeoutSeconds": 30,
+        "MaxRetryAttempts": 3
+      },
+      "sandbox": {
+        "DisplayName": "Sandbox Environment",
+        "OrganizationUrl": "https://yourorg-sandbox.crm.dynamics.com",
+        "Authentication": {
+          "AuthType": "Interactive",
+          "TenantId": "00000000-0000-0000-0000-000000000000",
+          "ClientId": "00000000-0000-0000-0000-000000000000",
+          "RedirectUri": "http://localhost"
+        },
+        "TimeoutSeconds": 30,
+        "MaxRetryAttempts": 2
+      },
+      "production": {
+        "DisplayName": "Production Environment",
+        "OrganizationUrl": "https://yourorg.crm.dynamics.com",
+        "Authentication": {
+          "AuthType": "ServicePrincipal",
+          "TenantId": "00000000-0000-0000-0000-000000000000",
+          "ClientId": "00000000-0000-0000-0000-000000000000",
+          "ClientSecret": "your-client-secret-here"
+        },
+        "TimeoutSeconds": 60,
+        "MaxRetryAttempts": 5
+      }
+    }
+  }
+}
