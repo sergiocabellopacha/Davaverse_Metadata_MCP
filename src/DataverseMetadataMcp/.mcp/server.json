@@ -83,8 +83,8 @@
               "isSecret": false
             },
             "tenant_id": {
-              "description": "Azure AD Tenant ID",
-              "isRequired": true,
+              "description": "Azure AD Tenant ID (optional for Interactive auth)",
+              "isRequired": false,
               "isSecret": false
             }
           }
@@ -99,8 +99,8 @@
               "isSecret": false
             },
             "client_id": {
-              "description": "Azure AD Application (Client) ID",
-              "isRequired": true,
+              "description": "Azure AD Application (Client) ID (optional for Interactive auth, required for ServicePrincipal)",
+              "isRequired": false,
               "isSecret": false
             }
           }

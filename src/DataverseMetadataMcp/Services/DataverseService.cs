@@ -415,6 +415,11 @@ public class DataverseService : IDataverseService, IDisposable
                 throw new InvalidOperationException("ClientSecret is required for ServicePrincipal authentication");
             }
             
+            if (string.IsNullOrEmpty(environment.Authentication.ClientId))
+            {
+                throw new InvalidOperationException("ClientId is required for ServicePrincipal authentication");
+            }
+            
             connectionStringBuilder.Append("AuthType=ClientSecret;");
             connectionStringBuilder.Append($"ClientId={environment.Authentication.ClientId};");
             connectionStringBuilder.Append($"ClientSecret={environment.Authentication.ClientSecret};");
@@ -422,7 +427,12 @@ public class DataverseService : IDataverseService, IDisposable
         else if (environment.Authentication.AuthType == AuthTypes.Interactive)
         {
             connectionStringBuilder.Append("AuthType=OAuth;");
-            connectionStringBuilder.Append($"ClientId={environment.Authentication.ClientId};");
+            
+            // ClientId is optional - if not provided, uses default app ID: 51f81489-12ee-4a9e-aaae-a2591f45987d
+            if (!string.IsNullOrEmpty(environment.Authentication.ClientId))
+            {
+                connectionStringBuilder.Append($"ClientId={environment.Authentication.ClientId};");
+            }
             
             if (!string.IsNullOrEmpty(environment.Authentication.RedirectUri))
             {

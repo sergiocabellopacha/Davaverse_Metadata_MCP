@@ -14,10 +14,7 @@
         "DisplayName": "Development Environment",
         "OrganizationUrl": "https://yourorg-dev.crm.dynamics.com",
         "Authentication": {
-          "AuthType": "Interactive",
-          "TenantId": "00000000-0000-0000-0000-000000000000",
-          "ClientId": "00000000-0000-0000-0000-000000000000",
-          "RedirectUri": "http://localhost"
+          "AuthType": "Interactive"
         },
         "TimeoutSeconds": 30,
         "MaxRetryAttempts": 3
@@ -26,10 +23,7 @@
         "DisplayName": "Sandbox Environment",
         "OrganizationUrl": "https://yourorg-sandbox.crm.dynamics.com",
         "Authentication": {
-          "AuthType": "Interactive",
-          "TenantId": "00000000-0000-0000-0000-000000000000",
-          "ClientId": "00000000-0000-0000-0000-000000000000",
-          "RedirectUri": "http://localhost"
+          "AuthType": "Interactive"
         },
         "TimeoutSeconds": 30,
         "MaxRetryAttempts": 2

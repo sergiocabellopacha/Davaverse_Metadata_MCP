@@ -68,16 +68,15 @@ public class DataverseAuth
     public string AuthType { get; set; } = string.Empty;
 
     /// <summary>
-    /// Azure AD Tenant ID
+    /// Azure AD Tenant ID (optional for Interactive auth - uses common endpoint if not specified)
     /// </summary>
-    [Required]
-    public string TenantId { get; set; } = string.Empty;
+    public string? TenantId { get; set; }
 
     /// <summary>
     /// Client ID (Application ID) for authentication
+    /// (optional for Interactive auth - uses default app ID 51f81489-12ee-4a9e-aaae-a2591f45987d if not specified)
     /// </summary>
-    [Required]
-    public string ClientId { get; set; } = string.Empty;
+    public string? ClientId { get; set; }
 
     /// <summary>
     /// Client Secret (only required for ServicePrincipal auth)

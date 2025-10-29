@@ -20,20 +20,20 @@
      "mcpServers": {
        "dataverse-metadata": {
          "type": "stdio",
-         "command": "dnx",
-         "args": ["DataverseMetadataMcp@1.0.0", "--yes"],
+         "command": "dotnet",
+         "args": ["tool", "run", "dataverse-mcp-server"],
          "env": {
            "DATAVERSE_MCP_Dataverse__CurrentEnvironment": "production",
            "DATAVERSE_MCP_Dataverse__Environments__production__DisplayName": "Mi Entorno",
            "DATAVERSE_MCP_Dataverse__Environments__production__OrganizationUrl": "https://tuorg.crm.dynamics.com",
-           "DATAVERSE_MCP_Dataverse__Environments__production__Authentication__AuthType": "Interactive",
-           "DATAVERSE_MCP_Dataverse__Environments__production__Authentication__TenantId": "tu-tenant-id",
-           "DATAVERSE_MCP_Dataverse__Environments__production__Authentication__ClientId": "tu-client-id"
+           "DATAVERSE_MCP_Dataverse__Environments__production__Authentication__AuthType": "Interactive"
          }
        }
      }
    }
    ```
+   
+   **Nota**: Para autenticación Interactive, solo necesitas `AuthType` y `OrganizationUrl`. `ClientId` y `TenantId` son opcionales.
 
 4. **Reinicia VS Code** y ¡listo! El servidor estará disponible en GitHub Copilot.
 
@@ -138,8 +138,9 @@ Ver `docs/PUBLISHING.md` para más detalles.
 
 ## 🆘 Problemas Comunes
 
-### "No se encontró el comando dnx"
+### "No se encontró el comando dataverse-mcp-server"
 ➡️ Instala .NET 8.0 SDK: https://dotnet.microsoft.com/download/dotnet/8.0
+➡️ Instala la herramienta global: `dotnet tool install -g DataverseMetadataMcp`
 
 ### El servidor no aparece en Copilot
 ➡️ Verifica el archivo `mcp.json` y reinicia VS Code

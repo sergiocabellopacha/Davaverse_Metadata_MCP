@@ -1,6 +1,37 @@
 # Resumen de Cambios - Dataverse Metadata MCP Server
 
-## ✅ Cambios Realizados
+## 🆕 v1.0.1 (Pendiente) - Correcciones Importantes
+
+### Cambios Críticos
+- ✅ **CORREGIDO**: Comando `dnx` obsoleto reemplazado por `dotnet tool run`
+  - DNX fue descontinuado en 2016
+  - Ahora usa el comando correcto para .NET tools: `dotnet tool run dataverse-mcp-server`
+  
+- ✅ **MEJORADO**: Autenticación Interactive simplificada
+  - `ClientId` y `TenantId` ahora son **opcionales** para autenticación Interactive
+  - Si no se especifican, usa la aplicación por defecto de Microsoft (ID: `51f81489-12ee-4a9e-aaae-a2591f45987d`)
+  - Solo son **requeridos** para autenticación ServicePrincipal
+
+### Archivos Modificados
+- `src/DataverseMetadataMcp/Configuration/DataverseConfig.cs`
+  - Removidos atributos `[Required]` de `ClientId` y `TenantId`
+  - Agregada documentación sobre valores opcionales
+  
+- `src/DataverseMetadataMcp/Services/DataverseService.cs`
+  - Actualizado `BuildConnectionString()` para no requerir `ClientId` en modo Interactive
+  - Agregada validación de `ClientId` solo para ServicePrincipal
+  
+- `README.md`, `QUICKSTART.md`, `CHANGELOG.md`, `docs/PUBLISHING.md`
+  - Corregido comando de `dnx` a `dotnet tool run dataverse-mcp-server`
+  - Actualizados ejemplos de configuración
+  - Mejorada documentación de autenticación
+  
+- `src/DataverseMetadataMcp/.mcp/server.json`
+  - Marcados `ClientId` y `TenantId` como `isRequired: false`
+
+---
+
+## ✅ v1.0.0 - Cambios Realizados
 
 ### 1. **Configuración del Proyecto para NuGet**
 
@@ -105,8 +136,8 @@ El proyecto ahora es:
   "mcpServers": {
     "dataverse-metadata": {
       "type": "stdio",
-      "command": "dnx",
-      "args": ["DataverseMetadataMcp@1.0.0", "--yes"],
+      "command": "dotnet",
+      "args": ["tool", "run", "dataverse-mcp-server"],
       "env": { ... }
     }
   }

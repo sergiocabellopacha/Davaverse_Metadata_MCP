@@ -98,8 +98,8 @@ Actualiza el README con instrucciones para la nueva versión:
   "mcpServers": {
     "dataverse-metadata": {
       "type": "stdio",
-      "command": "dnx",
-      "args": ["DataverseMetadataMcp@1.0.1", "--yes"],
+      "command": "dotnet",
+      "args": ["tool", "run", "dataverse-mcp-server"],
       ...
     }
   }

@@ -43,20 +43,20 @@ Un servidor MCP (Model Context Protocol) para consultar metadatos de Microsoft D
      "mcpServers": {
        "dataverse-metadata": {
          "type": "stdio",
-         "command": "dnx",
-         "args": ["DataverseMetadataMcp@1.0.0", "--yes"],
+         "command": "dotnet",
+         "args": ["tool", "run", "dataverse-mcp-server"],
          "env": {
            "DATAVERSE_MCP_Dataverse__CurrentEnvironment": "production",
            "DATAVERSE_MCP_Dataverse__Environments__production__DisplayName": "Mi Entorno de Producción",
            "DATAVERSE_MCP_Dataverse__Environments__production__OrganizationUrl": "https://tuorg.crm.dynamics.com",
-           "DATAVERSE_MCP_Dataverse__Environments__production__Authentication__AuthType": "Interactive",
-           "DATAVERSE_MCP_Dataverse__Environments__production__Authentication__TenantId": "tu-tenant-id",
-           "DATAVERSE_MCP_Dataverse__Environments__production__Authentication__ClientId": "tu-client-id"
+           "DATAVERSE_MCP_Dataverse__Environments__production__Authentication__AuthType": "Interactive"
          }
        }
      }
    }
    ```
+
+   **Nota**: Para autenticación interactiva, solo necesitas el `AuthType`. El `ClientId` y `TenantId` son opcionales (se usarán valores por defecto si no se especifican).
 
 ### Opción 2: Desarrollo Local
 
@@ -113,9 +113,9 @@ Para cada entorno (reemplaza `{env}` con el nombre del entorno, ej: `development
 - `DATAVERSE_MCP_Dataverse__Environments__{env}__DisplayName`: Nombre descriptivo del entorno
 - `DATAVERSE_MCP_Dataverse__Environments__{env}__OrganizationUrl`: URL de la organización Dataverse
 - `DATAVERSE_MCP_Dataverse__Environments__{env}__Authentication__AuthType`: Tipo de autenticación (`Interactive` o `ServicePrincipal`)
-- `DATAVERSE_MCP_Dataverse__Environments__{env}__Authentication__TenantId`: ID del tenant de Azure AD
-- `DATAVERSE_MCP_Dataverse__Environments__{env}__Authentication__ClientId`: ID de la aplicación Azure AD
-- `DATAVERSE_MCP_Dataverse__Environments__{env}__Authentication__ClientSecret`: Secreto del cliente (solo para ServicePrincipal)
+- `DATAVERSE_MCP_Dataverse__Environments__{env}__Authentication__TenantId`: ID del tenant de Azure AD (opcional para `Interactive`)
+- `DATAVERSE_MCP_Dataverse__Environments__{env}__Authentication__ClientId`: ID de la aplicación Azure AD (opcional para `Interactive`)
+- `DATAVERSE_MCP_Dataverse__Environments__{env}__Authentication__ClientSecret`: Secreto del cliente (requerido solo para `ServicePrincipal`)
 
 ### Ejemplo con Múltiples Entornos
 
@@ -124,21 +124,18 @@ Para cada entorno (reemplaza `{env}` con el nombre del entorno, ej: `development
   "mcpServers": {
     "dataverse-metadata": {
       "type": "stdio",
-      "command": "dnx",
-      "args": ["DataverseMetadataMcp@1.0.0", "--yes"],
+      "command": "dotnet",
+      "args": ["tool", "run", "dataverse-mcp-server"],
       "env": {
         "DATAVERSE_MCP_Dataverse__CurrentEnvironment": "development",
         
         "DATAVERSE_MCP_Dataverse__Environments__development__DisplayName": "Desarrollo",
         "DATAVERSE_MCP_Dataverse__Environments__development__OrganizationUrl": "https://dev.crm.dynamics.com",
         "DATAVERSE_MCP_Dataverse__Environments__development__Authentication__AuthType": "Interactive",
-        "DATAVERSE_MCP_Dataverse__Environments__development__Authentication__TenantId": "tenant-id",
-        "DATAVERSE_MCP_Dataverse__Environments__development__Authentication__ClientId": "client-id",
         
         "DATAVERSE_MCP_Dataverse__Environments__production__DisplayName": "Producción",
         "DATAVERSE_MCP_Dataverse__Environments__production__OrganizationUrl": "https://prod.crm.dynamics.com",
         "DATAVERSE_MCP_Dataverse__Environments__production__Authentication__AuthType": "ServicePrincipal",
-        "DATAVERSE_MCP_Dataverse__Environments__production__Authentication__TenantId": "tenant-id",
         "DATAVERSE_MCP_Dataverse__Environments__production__Authentication__ClientId": "client-id",
         "DATAVERSE_MCP_Dataverse__Environments__production__Authentication__ClientSecret": "secret"
       }
@@ -147,23 +144,28 @@ Para cada entorno (reemplaza `{env}` con el nombre del entorno, ej: `development
 }
 ```
 
+**Notas importantes**:
+- Para **autenticación Interactive**: Solo necesitas `AuthType`. `ClientId` y `TenantId` son opcionales.
+- Para **autenticación ServicePrincipal**: Debes proporcionar `ClientId` y `ClientSecret` (ambos requeridos).
+
 ## 🔑 Configuración de Azure AD
 
-Para usar este servidor, necesitas registrar una aplicación en Azure AD:
+**Para autenticación interactiva**, no necesitas configurar una Azure AD App Registration. El servidor utilizará la aplicación por defecto de Microsoft.
+
+**Para autenticación Service Principal**, sigue estos pasos:
 
 1. Ve a [Azure Portal](https://portal.azure.com)
 2. Navega a **Azure Active Directory** > **App registrations** > **New registration**
 3. Configura la aplicación:
    - **Name**: Dataverse MCP Server
    - **Supported account types**: Single tenant
-   - **Redirect URI**: `http://localhost` (para autenticación interactiva)
 4. Copia el **Application (client) ID** y **Directory (tenant) ID**
-5. Para Service Principal:
-   - Ve a **Certificates & secrets** > **New client secret**
+5. Ve a **Certificates & secrets** > **New client secret**
    - Copia el secreto generado
 6. Configura permisos API:
    - **API permissions** > **Add a permission** > **Dynamics CRM**
    - Agrega **user_impersonation** permission
+7. Asegúrate de que el Service Principal tenga acceso al entorno de Dataverse
 
 ## 🛠️ Herramientas Disponibles
 
@@ -260,14 +262,20 @@ Copilot: [Usa GetEnvironmentInfo]
 
 ## 🐛 Solución de Problemas
 
-### Error: "No se encontró el comando dnx"
+### Error: "No se encontró el comando dataverse-mcp-server"
 - Asegúrate de tener instalado .NET 8.0 SDK o superior
 - Verifica con: `dotnet --version`
+- Instala la herramienta globalmente: `dotnet tool install -g DataverseMetadataMcp`
 
-### Error de autenticación
-- Verifica que el TenantId y ClientId sean correctos
-- Para ServicePrincipal, asegúrate de que el ClientSecret sea válido
-- Verifica que la aplicación tenga permisos para Dynamics CRM
+### Error de autenticación Interactive
+- Si no especificas `ClientId`, se usa la aplicación por defecto de Microsoft
+- Asegúrate de tener permisos para acceder al entorno de Dataverse
+- Si aparece un error de autenticación, intenta especificar tu propio `ClientId` y `TenantId`
+
+### Error de autenticación ServicePrincipal
+- Verifica que el `ClientId` y `ClientSecret` sean correctos
+- Asegúrate de que el Service Principal tenga acceso al entorno de Dataverse
+- Verifica que la aplicación tenga permisos para Dynamics CRM en Azure AD
 
 ### El servidor no aparece en Copilot
 1. Verifica que el archivo `mcp.json` esté en la ubicación correcta
