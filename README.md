@@ -20,7 +20,11 @@ Un servidor MCP (Model Context Protocol) para consultar metadatos de Microsoft D
 
 ## 🔧 Instalación
 
-### Opción 1: Instalación vía NuGet (Recomendado)
+### Opción 1: Instalación vía NuGet (Próximamente)
+
+> ⚠️ **Nota**: El paquete aún no está publicado en NuGet. Por ahora, usa la **Opción 2: Desarrollo Local**.
+
+Una vez publicado, podrás instalarlo así:
 
 1. **Instalar .NET SDK** (si aún no lo tienes):
    ```bash
@@ -70,7 +74,7 @@ Un servidor MCP (Model Context Protocol) para consultar metadatos de Microsoft D
 
 5. **Reinicia VS Code** y ¡listo! El servidor estará disponible en GitHub Copilot.
 
-### Opción 2: Desarrollo Local
+### Opción 2: Desarrollo Local (Recomendado actualmente)
 
 1. **Clonar el repositorio**:
    ```bash
@@ -85,7 +89,7 @@ Un servidor MCP (Model Context Protocol) para consultar metadatos de Microsoft D
 
 3. **Configurar entorno local**:
    
-   Crea un archivo `.vscode/mcp.json` en la raíz del proyecto:
+   Crea un archivo `.vscode/mcp.json` en la raíz del proyecto con esta configuración:
    ```json
    {
      "mcpServers": {
@@ -101,14 +105,16 @@ Un servidor MCP (Model Context Protocol) para consultar metadatos de Microsoft D
            "DATAVERSE_MCP_Dataverse__CurrentEnvironment": "development",
            "DATAVERSE_MCP_Dataverse__Environments__development__DisplayName": "Desarrollo",
            "DATAVERSE_MCP_Dataverse__Environments__development__OrganizationUrl": "https://tuorg-dev.crm.dynamics.com",
-           "DATAVERSE_MCP_Dataverse__Environments__development__Authentication__AuthType": "Interactive",
-           "DATAVERSE_MCP_Dataverse__Environments__development__Authentication__TenantId": "tu-tenant-id",
-           "DATAVERSE_MCP_Dataverse__Environments__development__Authentication__ClientId": "tu-client-id"
+           "DATAVERSE_MCP_Dataverse__Environments__development__Authentication__AuthType": "Interactive"
          }
        }
      }
    }
    ```
+   
+   **Nota**: Reemplaza `https://tuorg-dev.crm.dynamics.com` con la URL de tu organización de Dataverse.
+
+4. **Reinicia VS Code** y el servidor MCP estará disponible en GitHub Copilot.
 
 ## ⚙️ Configuración
 

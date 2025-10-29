@@ -2,7 +2,9 @@
 
 ## 🚀 Para Usuarios
 
-### Instalación en 4 Pasos
+> ⚠️ **IMPORTANTE**: El paquete aún no está publicado en NuGet. Por ahora, usa la sección "Para Desarrolladores" para instalación local.
+
+### Instalación vía NuGet (Próximamente)
 
 1. **Asegúrate de tener .NET 8.0 SDK instalado**:
    ```bash
@@ -10,7 +12,7 @@
    # Debe mostrar 8.0.x o superior
    ```
 
-2. **Instala la herramienta globalmente**:
+2. **Instala la herramienta globalmente** (una vez publicado):
    ```bash
    dotnet tool install -g DataverseMetadataMcp
    ```
@@ -66,16 +68,24 @@ Prueba estos comandos en GitHub Copilot:
 
 2. **Copiar configuración de ejemplo**:
    ```bash
+   # En Windows PowerShell
+   Copy-Item .vscode\mcp.json.example .vscode\mcp.json
+   
+   # En Linux/macOS
    cp .vscode/mcp.json.example .vscode/mcp.json
    ```
 
-3. **Editar `.vscode/mcp.json`** con tus credenciales de Dataverse
+3. **Editar `.vscode/mcp.json`** y reemplazar:
+   - `https://yourorg-dev.crm.dynamics.com` con la URL de tu organización de desarrollo
+   - `https://yourorg.crm.dynamics.com` con la URL de tu organización de producción
+   - Para ServicePrincipal: reemplazar `ClientId` y `ClientSecret` con tus credenciales reales
 
-4. **Compilar y ejecutar**:
+4. **Compilar el proyecto**:
    ```bash
    dotnet build src/DataverseMetadataMcp/DataverseMetadataMcp.csproj
-   dotnet run --project src/DataverseMetadataMcp/DataverseMetadataMcp.csproj
    ```
+
+5. **Reinicia VS Code** para que cargue la configuración MCP.
 
 ### Probar con Copilot en Desarrollo
 
@@ -91,10 +101,20 @@ Tu configuración `.vscode/mcp.json` local debe usar:
         "--project",
         "src/DataverseMetadataMcp/DataverseMetadataMcp.csproj"
       ],
-      "env": { ... }
+      "env": {
+        "DATAVERSE_MCP_Dataverse__CurrentEnvironment": "development",
+        "DATAVERSE_MCP_Dataverse__Environments__development__OrganizationUrl": "https://tuorg.crm.dynamics.com",
+        "DATAVERSE_MCP_Dataverse__Environments__development__Authentication__AuthType": "Interactive"
+      }
     }
   }
 }
+```
+
+Una vez configurado, prueba en GitHub Copilot:
+```
+@workspace ¿Qué entidades tengo en Dataverse?
+@workspace Lista los campos de la tabla account
 ```
 
 ---
