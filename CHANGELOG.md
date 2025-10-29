@@ -3,9 +3,10 @@
 ## 🆕 v1.0.1 (Pendiente) - Correcciones Importantes
 
 ### Cambios Críticos
-- ✅ **CORREGIDO**: Comando `dnx` obsoleto reemplazado por `dotnet tool run`
-  - DNX fue descontinuado en 2016
-  - Ahora usa el comando correcto para .NET tools: `dotnet tool run dataverse-mcp-server`
+- ✅ **CORREGIDO**: Documentación de instalación mejorada
+  - Agregado paso explícito para instalar la herramienta global: `dotnet tool install -g DataverseMetadataMcp`
+  - Comando simplificado en mcp.json: usa directamente `dataverse-mcp-server` en lugar de `dotnet tool run`
+  - Agregada guía de troubleshooting para errores de instalación
   
 - ✅ **MEJORADO**: Autenticación Interactive simplificada
   - `ClientId` y `TenantId` ahora son **opcionales** para autenticación Interactive
@@ -131,13 +132,18 @@
 El proyecto ahora es:
 
 ### ✅ Fácil de Instalar
+```bash
+# Instalar la herramienta globalmente
+dotnet tool install -g DataverseMetadataMcp
+```
+
 ```json
 {
   "mcpServers": {
     "dataverse-metadata": {
       "type": "stdio",
-      "command": "dotnet",
-      "args": ["tool", "run", "dataverse-mcp-server"],
+      "command": "dataverse-mcp-server",
+      "args": [],
       "env": { ... }
     }
   }

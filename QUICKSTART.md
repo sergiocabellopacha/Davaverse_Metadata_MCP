@@ -146,6 +146,7 @@ Ver `docs/PUBLISHING.md` para más detalles.
 ### "No se encontró el comando dataverse-mcp-server"
 ➡️ Instala .NET 8.0 SDK: https://dotnet.microsoft.com/download/dotnet/8.0
 ➡️ Instala la herramienta global: `dotnet tool install -g DataverseMetadataMcp`
+➡️ Verifica que esté instalada: `dotnet tool list -g`
 
 ### El servidor no aparece en Copilot
 ➡️ Verifica el archivo `mcp.json` y reinicia VS Code

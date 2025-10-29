@@ -275,9 +275,27 @@ Copilot: [Usa GetEnvironmentInfo]
 ## 🐛 Solución de Problemas
 
 ### Error: "No se encontró el comando dataverse-mcp-server"
-- Asegúrate de tener instalado .NET 8.0 SDK o superior
-- Verifica con: `dotnet --version`
-- Instala la herramienta globalmente: `dotnet tool install -g DataverseMetadataMcp`
+Este error significa que la herramienta no está instalada globalmente. Soluciones:
+
+1. **Instala la herramienta**:
+   ```bash
+   dotnet tool install -g DataverseMetadataMcp
+   ```
+
+2. **Verifica que esté instalada**:
+   ```bash
+   dotnet tool list -g
+   # Debe aparecer "dataversemetadatamcp" en la lista
+   ```
+
+3. **Si ya está instalada, actualízala**:
+   ```bash
+   dotnet tool update -g DataverseMetadataMcp
+   ```
+
+4. **Verifica la ruta de las herramientas globales**:
+   - Las herramientas se instalan en `%USERPROFILE%\.dotnet\tools` (Windows)
+   - Asegúrate de que esta ruta esté en tu variable de entorno PATH
 
 ### Error de autenticación Interactive
 - Si no especificas `ClientId`, se usa la aplicación por defecto de Microsoft
