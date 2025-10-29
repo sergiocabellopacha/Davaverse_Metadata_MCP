@@ -45,8 +45,7 @@ Una vez publicado, podrás instalarlo así:
 3. **Configurar en VS Code**:
    
    Crea o edita el archivo de configuración MCP en VS Code:
-   - **Windows**: `%APPDATA%\Code\User\globalStorage\github.copilot-chat\mcp.json`
-   - **macOS/Linux**: `~/.config/Code/User/globalStorage/github.copilot-chat/mcp.json`
+   - **Windows**: `%APPDATA%\Roaming\Code\User\mcp.json`
 
    O crea un archivo `.vscode/mcp.json` en la raíz de tu workspace.
 
@@ -111,7 +110,7 @@ Una vez publicado, podrás instalarlo así:
      }
    }
    ```
-   
+    **Nota**: es posible que ese path al proyecto no sirva y tengas que ponerlo completo a donde lo hayas clonado.
    **Nota**: Reemplaza `https://tuorg-dev.crm.dynamics.com` con la URL de tu organización de Dataverse.
 
 4. **Reinicia VS Code** y el servidor MCP estará disponible en GitHub Copilot.
