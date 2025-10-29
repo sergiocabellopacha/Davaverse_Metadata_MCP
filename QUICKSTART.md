@@ -2,7 +2,7 @@
 
 ## 🚀 Para Usuarios
 
-### Instalación en 3 Pasos
+### Instalación en 4 Pasos
 
 1. **Asegúrate de tener .NET 8.0 SDK instalado**:
    ```bash
@@ -10,18 +10,23 @@
    # Debe mostrar 8.0.x o superior
    ```
 
-2. **Crea o edita tu archivo de configuración MCP**:
+2. **Instala la herramienta globalmente**:
+   ```bash
+   dotnet tool install -g DataverseMetadataMcp
+   ```
+
+3. **Crea o edita tu archivo de configuración MCP**:
    - Windows: `%APPDATA%\Code\User\globalStorage\github.copilot-chat\mcp.json`
    - macOS/Linux: `~/.config/Code/User/globalStorage/github.copilot-chat/mcp.json`
 
-3. **Agrega esta configuración** (reemplaza los valores con tus datos):
+4. **Agrega esta configuración** (reemplaza los valores con tus datos):
    ```json
    {
      "mcpServers": {
        "dataverse-metadata": {
          "type": "stdio",
-         "command": "dotnet",
-         "args": ["tool", "run", "dataverse-mcp-server"],
+         "command": "dataverse-mcp-server",
+         "args": [],
          "env": {
            "DATAVERSE_MCP_Dataverse__CurrentEnvironment": "production",
            "DATAVERSE_MCP_Dataverse__Environments__production__DisplayName": "Mi Entorno",
@@ -35,7 +40,7 @@
    
    **Nota**: Para autenticación Interactive, solo necesitas `AuthType` y `OrganizationUrl`. `ClientId` y `TenantId` son opcionales.
 
-4. **Reinicia VS Code** y ¡listo! El servidor estará disponible en GitHub Copilot.
+5. **Reinicia VS Code** y ¡listo! El servidor estará disponible en GitHub Copilot.
 
 ### Primeros Pasos con Copilot
 

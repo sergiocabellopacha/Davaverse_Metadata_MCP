@@ -28,7 +28,17 @@ Un servidor MCP (Model Context Protocol) para consultar metadatos de Microsoft D
    dotnet --version
    ```
 
-2. **Configurar en VS Code**:
+2. **Instalar la herramienta globalmente**:
+   ```bash
+   dotnet tool install -g DataverseMetadataMcp
+   ```
+   
+   **Nota**: Si ya la tienes instalada y quieres actualizar a la última versión:
+   ```bash
+   dotnet tool update -g DataverseMetadataMcp
+   ```
+
+3. **Configurar en VS Code**:
    
    Crea o edita el archivo de configuración MCP en VS Code:
    - **Windows**: `%APPDATA%\Code\User\globalStorage\github.copilot-chat\mcp.json`
@@ -36,15 +46,15 @@ Un servidor MCP (Model Context Protocol) para consultar metadatos de Microsoft D
 
    O crea un archivo `.vscode/mcp.json` en la raíz de tu workspace.
 
-3. **Agregar configuración del servidor**:
+4. **Agregar configuración del servidor**:
 
    ```json
    {
      "mcpServers": {
        "dataverse-metadata": {
          "type": "stdio",
-         "command": "dotnet",
-         "args": ["tool", "run", "dataverse-mcp-server"],
+         "command": "dataverse-mcp-server",
+         "args": [],
          "env": {
            "DATAVERSE_MCP_Dataverse__CurrentEnvironment": "production",
            "DATAVERSE_MCP_Dataverse__Environments__production__DisplayName": "Mi Entorno de Producción",
@@ -57,6 +67,8 @@ Un servidor MCP (Model Context Protocol) para consultar metadatos de Microsoft D
    ```
 
    **Nota**: Para autenticación interactiva, solo necesitas el `AuthType`. El `ClientId` y `TenantId` son opcionales (se usarán valores por defecto si no se especifican).
+
+5. **Reinicia VS Code** y ¡listo! El servidor estará disponible en GitHub Copilot.
 
 ### Opción 2: Desarrollo Local
 
@@ -124,8 +136,8 @@ Para cada entorno (reemplaza `{env}` con el nombre del entorno, ej: `development
   "mcpServers": {
     "dataverse-metadata": {
       "type": "stdio",
-      "command": "dotnet",
-      "args": ["tool", "run", "dataverse-mcp-server"],
+      "command": "dataverse-mcp-server",
+      "args": [],
       "env": {
         "DATAVERSE_MCP_Dataverse__CurrentEnvironment": "development",
         
